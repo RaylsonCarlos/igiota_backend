@@ -14,14 +14,14 @@ const User = function(user) {
 User.create = (newUser, result) => {
 
     //check if password is too short
-    if(newUser.password.length < 6){
+    if(!newUser.password || newUser.password.length < 6){
         let message = "weak password";
         result({"message": message}, null);
         return;
     }
 
     //check if the password and confirm_password are equal
-    if(newUser.password != newUser.confirm_password){
+    if(!newUser.password || !newUser.confirm_password || newUser.password != newUser.confirm_password){
         let message = "password fields doesn't match";
         result({"message": message}, null);
         return;
