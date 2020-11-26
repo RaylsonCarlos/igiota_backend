@@ -1,5 +1,9 @@
 module.exports = app => {
     const users = require("../controllers/user.controller.js");
+    const login = require("../controllers/login.controller.js");
+
+    //login
+    app.post("/login", login.check);
   
     // Create a new Customer
     app.post("/users", users.create);
@@ -8,7 +12,7 @@ module.exports = app => {
     app.get("/users", users.findAll);
   
     // Retrieve a single Customer with customerId
-    app.get("/users/:userId", users.findOne);    
+    app.get("/users/:userId", users.findOne);
   
     // Update a Customer with customerId
     app.put("/users/:userId", users.update);

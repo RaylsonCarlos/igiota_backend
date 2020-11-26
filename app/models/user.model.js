@@ -2,18 +2,18 @@ const sql = require("./db.js");
 
 const crypto = require('crypto');
 
-const hash = crypto.createHash('sha256')
-
 // constructor
 const User = function(user) {
   this.email = user.email;
+  this.password = user.password;
+  this.confirm_password = user.confirm_password;
   this.name = user.name;
-  this.active = user.active;
+  this.active = user.active;  
 };
 
 User.create = (newUser, result) => {
 
-    //check if password is too short
+    //check if password is too short    
     if(!newUser.password || newUser.password.length < 6){
         let message = "weak password";
         result({"message": message}, null);
@@ -28,7 +28,7 @@ User.create = (newUser, result) => {
     }
 
     //hashes the password and delete the confirm_password field
-    newUser.password = hash.update(newUser.email + newUser.password).digest('base64');
+    newUser.password = crypto.createHash('sha256').update(newUser.email + newUser.password).digest('base64');
     delete newUser.confirm_password;
         
   sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
