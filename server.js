@@ -14,6 +14,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Igiota application." });
 });
 
+app.get("/docs", (req, res) => {
+  fs = require('fs');
+  fs.readFile('docs.html', 'utf-8' ,(err, data) => {    
+    res.send(data);
+  });  
+});
+
 require("./app/routes/user.routes.js")(app);
 
 // set port, listen for requests
