@@ -80,6 +80,40 @@
             </tr>
         </table>
     </li>
+    <li>Dividas
+        <table>
+            <tr>
+                <th>o que?</th>
+                <th>Método</th>
+                <th>Link</th>
+                <th>Cabeçalhos</th>
+                <th>campos</th>
+                <th>resposta</th>
+            </tr>
+            <tr>
+                <td>Criar dívida</td>
+                <td>POST</td>
+                <td>/debts</td>
+                <td>Content-Type: application/json</td>
+                <td>
+                    <ul>
+                        <li>owner - int (userId)</li>
+                        <li>owe_to - int (userId)</li>
+                        <li>value - double</li>
+                        <li>active - boolean</li>
+                    </ul>
+                </td>
+                <td>JSON com a dívida recém criada</td>
+            </tr>
+            <tr>
+                <td>Consultar dívidas tem/possuídas por um usuário</td>
+                <td>GET</td>
+                <td>/debts/'id do usuário'</td>
+                <td>Content-Type: application/x-www-form-urlencoded</td>
+                <td> - </td>
+                <td>JSON com lista de dívidas</td>
+            </tr>
+    </li>
 </ul>
 
 </html>
