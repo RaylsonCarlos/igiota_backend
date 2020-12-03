@@ -8,7 +8,8 @@ const User = function(user) {
   this.password = user.password;
   this.confirm_password = user.confirm_password;
   this.name = user.name;
-  this.active = user.active;  
+  this.active = user.active;
+  this.phone = user.phone;
 };
 
 User.create = (newUser, result) => {
