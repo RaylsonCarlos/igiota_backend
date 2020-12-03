@@ -1,41 +1,79 @@
 <html>
-    <head>
-        <style>
-            table {border: 1px solid black;}
-            td {border: 1px solid black;}
-        </style>
-    </head>
-    <h1>DOCS</h1>
-    <ul>
-        <li>
-            User
-            <table>
-                <tr>
-                    <th>o que?</th>
-                    <th>Método</th>
-                    <th>Link</th>
-                    <th>Content-Type</th>
-                    <th>campos</th>
-                    <th>resposta</th>
-                </tr>
-                <tr>
-                    <td>Criar usuário</td>
-                    <td>POST</td>
-                    <td>/users</td>
-                    <td>application/json</td>
-                    <td>
-                        <ul>
-                            <li>name - text</li>
-                            <li>email - text</li>
-                            <li>active - boolean</li>
-                            <li>password - text</li>
-                            <li>confirm_password - text</li>
-                            <li>phone - text</li>
-                        </ul>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>        
-        </li>
-    </ul>
+
+<head>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<h1>DOCS</h1>
+<h6>RAIZ: https://igiota.herokuapp.com</h6>
+<ul>
+    <li>
+        User
+        <table>
+            <tr>
+                <th>o que?</th>
+                <th>Método</th>
+                <th>Link</th>
+                <th>Cabeçalhos</th>
+                <th>campos</th>
+                <th>resposta</th>
+            </tr>
+            <tr>
+                <td>Criar usuário</td>
+                <td>POST</td>
+                <td>/users</td>
+                <td>Content-Type: application/json</td>
+                <td>
+                    <ul>
+                        <li>name - text</li>
+                        <li>email - text</li>
+                        <li>active - boolean</li>
+                        <li>password - text</li>
+                        <li>confirm_password - text</li>
+                        <li>phone - text</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>id</li>
+                        <li>email</li>
+                        <li>name</li>
+                        <li>phone</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Listar usuários</td>
+                <td>GET</td>
+                <td>/users</td>
+                <td> - </td>
+                <td> - </td>
+                <td>JSON de lista de usuários</td>
+            </tr>
+            <tr>
+                <td>Fazer Login</td>
+                <td>POST</td>
+                <td>/login</td>
+                <td>Content-Type: application/json</td>
+                <td>
+                    <ul>
+                        <li>userId</li>
+                        <li>token</li>
+                        <li>name</li>
+                        <li>valid_untill</li>
+                        <li>login_success</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </li>
+</ul>
+
 </html>
