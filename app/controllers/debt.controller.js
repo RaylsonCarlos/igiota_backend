@@ -21,7 +21,7 @@ exports.create = (req, res) => {
                 return;
             }
             res.status(500).send({
-                message: err.message || "Some error occured while creating the Debt."
+                message: err.message || "Some error occurred while creating the Debt."
             });
         } else res.send(data);
     });

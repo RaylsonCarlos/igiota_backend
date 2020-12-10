@@ -107,13 +107,49 @@
                 <td>JSON com a dívida recém criada</td>
             </tr>
             <tr>
-                <td>Consultar dívidas tem/possuídas por um usuário</td>
+                <td>Consultar dívidas por usuário (que possui com outrem ou que outrem possui com ele)</td>
                 <td>GET</td>
                 <td>/debts/'id do usuário'</td>
                 <td>Content-Type: application/x-www-form-urlencoded</td>
                 <td> - </td>
                 <td>JSON com lista de dívidas</td>
             </tr>
+        </table>
+    </li>
+    <li>Pagamentos
+        <table>
+            <tr>
+                <th>o que?</th>
+                <th>Método</th>
+                <th>Link</th>
+                <th>Cabeçalhos</th>
+                <th>campos</th>
+                <th>resposta</th>
+            </tr>
+            <tr>
+                <td>Criar pagamento</td>
+                <td>POST</td>
+                <td>/payments</td>
+                <td>Content-Type: application/json</td>
+                <td>
+                    <ul>
+                        <li>user - int (userId)</li>
+                        <li>debt - int (debtId)</li>
+                        <li>value - double</li>                        
+                        <li>token - text</li>
+                    </ul>
+                </td>
+                <td>JSON com o pagamento recém criado</td>
+            </tr>
+            <tr>
+                <td>Consultar os pagamentos realizados sobre uma dívida</td>
+                <td>GET</td>
+                <td>/payments/'id da dívida'</td>
+                <td>Content-Type: application/x-www-form-urlencoded</td>
+                <td> - </td>
+                <td>JSON com lista de pagamentos</td>
+            </tr>
+        </table>
     </li>
 </ul>
 
