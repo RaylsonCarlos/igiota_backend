@@ -5,12 +5,12 @@ const Debt = function(debt){
     this.owner = debt.owner;
     this.owe_to = debt.owe_to;
     this.value = debt.value;
-    this.active = debt.active;    
+    this.active = debt.active;
 };
 
 Debt.create = (newDebt, token, result) => {
 
-    auth(Debt.owner, token, (err, res) => {
+    auth(newDebt.owner, token, (err, res) => {
         if(err){
             result(err, null);
             return;

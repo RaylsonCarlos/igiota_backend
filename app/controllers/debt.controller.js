@@ -18,6 +18,7 @@ exports.create = (req, res) => {
         if(err){
             if(err.kind == "not_found"){
                 res.status(401).send({message: "unauthorized!"});
+                return;
             }
             res.status(500).send({
                 message: err.message || "Some error occured while creating the Debt."
