@@ -1,5 +1,5 @@
 const sql = require("./db.js");
-
+const auth = require("./utils.js");
 const crypto = require('crypto');
 
 // constructor
@@ -10,6 +10,8 @@ const User = function(user) {
   this.name = user.name;
   this.active = user.active;
   this.phone = user.phone;
+  this.id = user.id;
+  this.token = user.token;
 };
 
 User.create = (newUser, result) => {
@@ -31,20 +33,58 @@ User.create = (newUser, result) => {
     //hashes the password and delete the confirm_password field
     newUser.password = crypto.createHash('sha256').update(newUser.email + newUser.password).digest('base64');
     delete newUser.confirm_password;
+  
+    if (newUser.id && newUser.token){
+
+      auth(newUser.id, newUser.token, (err, res) =>{
+        if(err){
+          result(err, null);
+          return;
+        }
+
+        if(res){
+          sql.query(`BEGIN 
+                        UPDATE User SET active = False
+                          WHERE id = ${newUser.id};
+                        INSERT INTO User SET email = (SELECT email from User Where id = ${newUser.id}),
+                                             password = ${newUser.password},
+                                             name = ${newUser.name},
+                                             active = ${newUser.active},
+                                             phone = ${newUser.phone}
+                      END`, (err, res) => {
+                        
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            }
         
-  sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+            //delete the password field
+            delete newUser.password;
+        
+            console.log("updated user: ", { id: res.insertId, ...newUser });
+            result(null, { id: res.insertId, ...newUser });
+          });
+        }
+      });
 
-    //delete the password field
-    delete newUser.password;
+    } else {
 
-    console.log("created user: ", { id: res.insertId, ...newUser });
-    result(null, { id: res.insertId, ...newUser });
-  });
+      sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
+    
+        //delete the password field
+        delete newUser.password;
+    
+        console.log("created user: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+      });
+      
+    }  
 };
 
 User.findById = (userId, result) => {
