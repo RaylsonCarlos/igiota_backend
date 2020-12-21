@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS `User` (
   password varchar(64) NOT NULL,
   name varchar(255) NOT NULL,
   phone varchar(25) NOT NULL,
-  active BOOLEAN DEFAULT true
+  active BOOLEAN DEFAULT true,
+  UNIQUE (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `User_Login` (

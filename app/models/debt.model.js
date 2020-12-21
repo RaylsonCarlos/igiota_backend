@@ -33,7 +33,11 @@ Debt.create = (newDebt, token, result) => {
 };
 
 Debt.findAll = (userId, result) => {
-    sql.query(`SELECT * FROM Debt WHERE owner = ${userId} or owe_to = ${userId}`, (err, res) => {
+    sql.query(`SELECT Debt.* , OWNER.name AS OWNER_NAME, OWNER.email AS OWNER_EMAIL, OWE_TO.name AS OWE_TO_NAME, OWE_TO.email AS OWE_TO_EMAIL
+                    FROM Debt 
+                        INNER JOIN User AS OWNER ON Debt.owner = OWNER.id
+                        INNER JOIN User AS OWE_TO ON Debt.owe_to = OWE_TO.id
+                    WHERE owner = ${userId} or owe_to = ${userId}`, (err, res) => {
         if(err){
             result(err, null);
             return;
