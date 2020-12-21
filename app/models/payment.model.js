@@ -32,8 +32,8 @@ Payment.create = (newPayment, userId, token, result) => {
 };
 
 Payment.findAll = (debtId , result) => {
-    sql.query(`SELECT *, OWNER.id AS DEBT_OWNER_ID, OWNER.name AS DEBT_OWNER_NAME, OWNER.email AS DEBT_OWNER_EMAIL,
-                    OWE_TO.id AS DEBT_OWE_TO_ID, OWE_TO.name AS DEBT_OWE_TO_NAME, OWE_TO.email AS DEBT_OWE_TO_EMAIL                    
+    sql.query(`SELECT Payment.id as id, Payment.debt_id as debt_id, Payment.value as value, OWNER.id AS DEBT_OWNER_ID, OWNER.name AS DEBT_OWNER_NAME, OWNER.email AS DEBT_OWNER_EMAIL,
+                    OWE_TO.id AS DEBT_OWE_TO_ID, OWE_TO.name AS DEBT_OWE_TO_NAME, OWE_TO.email AS DEBT_OWE_TO_EMAIL                 
                     FROM Payment 
                         INNER JOIN Debt ON Payment.debt_id = Debt.Id
                         INNER JOIN User AS OWNER ON Debt.Owner = OWNER.id
