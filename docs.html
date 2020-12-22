@@ -26,7 +26,7 @@
                 <th>resposta</th>
             </tr>
             <tr>
-                <td>Criar usuário</td>
+                <td>Criar / Modificar usuário</td>
                 <td>POST</td>
                 <td>/users</td>
                 <td>Content-Type: application/json</td>
@@ -38,6 +38,9 @@
                         <li>password - text</li>
                         <li>confirm_password - text</li>
                         <li>phone - text</li>
+                        <p>parâmetros adicionais para modificar um usuário:</p>
+                        <li>userid - int</li>
+                        <li>token - text</li>
                     </ul>
                 </td>
                 <td>

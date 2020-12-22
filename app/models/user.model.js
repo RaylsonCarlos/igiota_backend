@@ -43,15 +43,11 @@ User.create = (newUser, result) => {
         }
 
         if(res){
-          sql.query(`BEGIN 
-                        UPDATE User SET active = False
-                          WHERE id = ${newUser.id};
-                        INSERT INTO User SET email = (SELECT email from User Where id = ${newUser.id}),
-                                             password = ${newUser.password},
-                                             name = ${newUser.name},
-                                             active = ${newUser.active},
-                                             phone = ${newUser.phone}
-                      END`, (err, res) => {
+          sql.query(`UPDATE User SET password = '${newUser.password}',
+                                     name = '${newUser.name}', 
+                                     active = ${newUser.active}, 
+                                     phone = '${newUser.phone}' 
+                        WHERE id = ${newUser.id};`, (err, res) => {
                         
             if (err) {
               console.log("error: ", err);
