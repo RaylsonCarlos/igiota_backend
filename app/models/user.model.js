@@ -66,6 +66,9 @@ User.create = (newUser, result) => {
 
     } else {
 
+      delete newUser.id;
+      delete newUser.token;
+
       sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
         if (err) {
           console.log("error: ", err);
